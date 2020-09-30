@@ -1,5 +1,6 @@
 # Amount Validator Input Field - JavaScript
 
+### Demo link https://nubnasir.github.io/amount-input-field-js/
 
 Key notes
 => Allows numbers 0-9, comma (,) and dot(.)
