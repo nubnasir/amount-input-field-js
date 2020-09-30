@@ -1,3 +1,5 @@
+	var __splitInputValueOnKeyPress = 0;
+	
 	function validAmountOnKeyUp (element) {
 		var elValue = element.value.split(".");
 		var value = elValue[0].replace(/,/g, '');
@@ -43,4 +45,19 @@
 		}
 		element.selectionStart = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
 		element.selectionEnd = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
+	}
+
+	function validAmountOnKeyPress (element) {
+		try {
+			if(element.selectionStart !=0) {
+				__splitInputValueOnKeyPress = element.value.substring(0,element.selectionStart).split(",").length;
+			}
+		} catch(e){
+			__splitInputValueOnKeyPress = 0;
+		}
+		var charCode = (element.which) ? element.which : event.keyCode;
+		if((charCode >=48 && charCode <=57) || charCode == 44 || charCode == 46){
+			return true;
+		}
+		return false;
 	}
