@@ -1,6 +1,12 @@
-	var __splitInputValueOnKeyPress = 0;
+/*
+	***Amount validator and auto formatter javaScript version-1.1
+	***Finance js lib development
+	***Author/Developer: Md. Nasir Uddin Bhuiyan
+*/
+var __splitInputValueOnKeyPress = 0;
 	
 	function validAmountOnKeyUp (element) {
+		var cursorPosition = element.selectionStart;
 		var elValue = element.value.split(".");
 		var value = elValue[0].replace(/,/g, '');
 		var decimalPart = elValue.length > 1? '.' + elValue[1] : '';
@@ -38,11 +44,13 @@
 		element.value = result;
 
 		var charCode = (element.which) ? element.which : event.keyCode;
-		var cursorPosition = element.selectionStart;
+		console.log("cursorPosition" + cursorPosition);
+		console.log("__splitInputValueOnKeyPress" + __splitInputValueOnKeyPress);
 		var cursorPositionAdder = 0;
 		if((charCode >=48 && charCode <=57) || (charCode >=96 && charCode <=105) || charCode == 188 || charCode == 190){
 			cursorPositionAdder = result.substring(0,cursorPosition).split(",").length - __splitInputValueOnKeyPress;
 		}
+		console.log("cursorPositionAdder" + cursorPositionAdder);
 		element.selectionStart = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
 		element.selectionEnd = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
 	}
