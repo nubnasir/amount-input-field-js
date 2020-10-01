@@ -1,7 +1,8 @@
 /*
-	***Amount validator and auto formatter javaScript version-1.1
-	***Finance js lib development
-	***Author/Developer: Md. Nasir Uddin Bhuiyan
+	*** Amount validator and auto formatter javaScript
+	*** version-1.0
+	*** Finance js lib development
+	*** Author/Developer: Md. Nasir Uddin Bhuiyan
 */
 var __splitInputValueOnKeyPress = 0;
 	
@@ -31,7 +32,7 @@ var __splitInputValueOnKeyPress = 0;
 			
 		var result = '';
 		for (var i = resultArray.length - 1; i >= 0; i--) {
-			var temp = resultArray[i].split('');
+			temp = resultArray[i].split('');
 			for (var j = temp.length - 1; j >= 0; j--) {
 				result += temp[j];
 			};
