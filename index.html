@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="amount-1.0.min.js"></script>
+	<style type="text/css">
+		.amount-field {
+			width: 500px;
+		    font-size: 18px;
+		    padding: 7px;
+		    border: solid #7c4d9c 2px;
+		    border-radius: 5px;
+		}
+
+		.row {
+			/*margin: 20px;*/
+		}
+
+		.input-field {
+			text-align: center;
+		}
+
+		.notes {
+		}
+
+		h1 {
+			color: #204290;
+			text-align: center;
+		}
+
+		h3, h4 {
+			text-align: center;
+			color: #657290;
+		}
+
+		.code-section {
+			font-style: italic;
+		    color: #6f5375;
+		    background-color: #e0e0e0;
+		    padding: 3px;
+		}
+	</style>
+	<title>Amount Validator and Formatter Input Field - JavaScript</title>
+</head>
+<body>
+
+	<br/>
+	<h1>Amount Validator and Formatter Input Field - JavaScript</h1>
+	<h1>version 1.0</h1>
+	<h4>Author and Developer: Md. Nasir Uddin Bhuiyan (<a href="mailto:nubnasir@gmail.com">nubnasir@gmail.com</a>)</h4>
+
+	<h3>Demo</h1>
+
+	<div class="input-field">
+		<input class="amount-field" type="text" onkeyup="validAmountOnKeyUp(this)" onkeypress="return validAmountOnKeyPress(this)" placeholder="8,105,365.75" autofocus>
+	</div>
+</body>
+</html>
