@@ -9,7 +9,7 @@ Key notes
 
 => Prevents more that two(2) decimal points
 
-=> Raw JavaScript code so no extra additional library is required
+=> No extra additional library is required
 
 
 How to use
