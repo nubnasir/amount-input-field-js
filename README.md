@@ -15,7 +15,7 @@ Key notes
 How to use
 ### Step 1 
 
-download amount.js from this github repo
+download latest amount.min.js from this github repo
 
 ### Step 2 
 
