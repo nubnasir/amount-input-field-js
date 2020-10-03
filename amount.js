@@ -1,12 +1,17 @@
 /*
 	*** Amount validator and auto formatter javaScript
-	*** version-1.0
+	*** version-1.1
 	*** Finance js lib development
 	*** Author/Developer: Md. Nasir Uddin Bhuiyan
 */
 var __splitInputValueOnKeyPress = 0;
 	
 	function validAmountOnKeyUp (element) {
+		if(!isValidInputValue(element.value)){
+			element.value = '';
+			return;
+		}
+
 		var cursorPosition = element.selectionStart;
 		var elValue = element.value.split(".");
 		var value = elValue[0].replace(/,/g, '');
@@ -44,16 +49,16 @@ var __splitInputValueOnKeyPress = 0;
 		result = result + (decimalPart.length <= 3 ? decimalPart : decimalPart.substring(0,3));
 		element.value = result;
 
-		var charCode = (element.which) ? element.which : event.keyCode;
-		console.log("cursorPosition" + cursorPosition);
-		console.log("__splitInputValueOnKeyPress" + __splitInputValueOnKeyPress);
-		var cursorPositionAdder = 0;
-		if((charCode >=48 && charCode <=57) || (charCode >=96 && charCode <=105) || charCode == 188 || charCode == 190){
-			cursorPositionAdder = result.substring(0,cursorPosition).split(",").length - __splitInputValueOnKeyPress;
+		if(!isMobileOrTablet()) {
+			var charCode = (element.which) ? element.which : event.keyCode;
+			var cursorPositionAdder = 0;
+			if((charCode >=48 && charCode <=57) || (charCode >=96 && charCode <=105) || charCode == 188 || charCode == 190){
+				cursorPositionAdder = result.substring(0,cursorPosition).split(",").length - __splitInputValueOnKeyPress;
+			}
+			console.log("cursorPositionAdder" + cursorPositionAdder);
+			element.selectionStart = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
+			element.selectionEnd = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
 		}
-		console.log("cursorPositionAdder" + cursorPositionAdder);
-		element.selectionStart = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
-		element.selectionEnd = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
 	}
 
 	function validAmountOnKeyPress (element) {
@@ -65,8 +70,31 @@ var __splitInputValueOnKeyPress = 0;
 			__splitInputValueOnKeyPress = 0;
 		}
 		var charCode = (element.which) ? element.which : event.keyCode;
+		if(!isValidInputValue(String.fromCharCode(charCode))){
+			return false;
+		}
 		if((charCode >=48 && charCode <=57) || charCode == 44 || charCode == 46){
 			return true;
 		}
 		return false;
+	}
+
+	function isValidInputValue(value){
+		return /^-?[\d,.]*$/.test(value);
+	}
+
+	function isMobileOrTablet() {
+		const toMatch = [
+	        /Android/i,
+	        /webOS/i,
+	        /iPhone/i,
+	        /iPad/i,
+	        /iPod/i,
+	        /BlackBerry/i,
+	        /Windows Phone/i
+	    ];
+
+	    return toMatch.some((toMatchItem) => {
+	        return navigator.userAgent.match(toMatchItem);
+	    });
 	}
