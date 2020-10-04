@@ -5,27 +5,19 @@
 	*** Author/Developer: Md. Nasir Uddin Bhuiyan
 */
 	var __splitInputValueOnKeyPress = 0;
-	/*document.addEventListener('DOMContentLoaded',function(){
-		var amountInputs = document.getElementsByClassName("amount");
-		for(var i=0; i<amountInputs.length; i++){
-					amountInputs[i].onkeyup = validAmount(amountInputs[i]);
-					amountInputs[i].onkeypress = validChar(amountInputs[i]);
-					amountInputs[i].onpaste = pasteFilter(amountInputs[i]);
-		}
-	});*/
+	var __pasteCursorPosition = 0;
 
-	function validAmount () {
-		console.log("validAmount"+this.value);
+	function validAmount (e) {
 		if(!isValidInputValue(this.value)){
 			this.value = '';
 			return;
 		}
 
-		var cursorPosition = this.selectionStart;
+		var cursorPosition = e.target.selectionStart;
 		console.log("cursorPosition" + cursorPosition);
 		var elValue = this.value.split(".");
 		var value = elValue[0].replace(/,/g, '');
-		var decimalPart = elValue.length > 1? '.' + elValue[1] : '';
+		var decimalPart = elValue.length > 1? '.' + elValue[1].replace(',', '') : '';
 
 		var valueArray = value.split('');
 		var resultArray = [];
@@ -59,22 +51,28 @@
 		result = result + (decimalPart.length <= 3 ? decimalPart : decimalPart.substring(0,3));
 		this.value = result;
 
-		var charCode = (this.which) ? this.which : this.keyCode;
+		var charCode = (e.which) ? e.which : e.keyCode;
+		console.log("charCode" + charCode);
 		var cursorPositionAdder = 0;
 		console.log("__splitInputValueOnKeyPress" + __splitInputValueOnKeyPress);
 		if((charCode >=48 && charCode <=57) || (charCode >=96 && charCode <=105) || charCode == 188 || charCode == 190){
 			cursorPositionAdder = result.substring(0,cursorPosition).split(",").length - __splitInputValueOnKeyPress;
 		}
+		console.log("__pasteCursorPosition" + __pasteCursorPosition);
+		if(__pasteCursorPosition > 0){
+			cursorPositionAdder += __pasteCursorPosition
+			__pasteCursorPosition = 0;
+		}
 		console.log("cursorPositionAdder" + cursorPositionAdder);
-		this.selectionStart = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
-		this.selectionEnd = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
+		e.target.selectionStart = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
+		e.target.selectionEnd = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
 	}
 
 	function validChar (event) {
-		console.log("validChar"+event.value);
+		console.log("validChar"+event.target.value);
 		try {
-			if(event.selectionStart !=0) {
-				__splitInputValueOnKeyPress = event.value.substring(0,event.selectionStart).split(",").length;
+			if(event.target.selectionStart !=0) {
+				__splitInputValueOnKeyPress = event.target.value.substring(0,event.target.selectionStart).split(",").length;
 			}
 		} catch(e){
 			__splitInputValueOnKeyPress = 0;
@@ -93,17 +91,23 @@
 		return /^-?[\d,.]*$/.test(value);
 	}
 
-	function pasteFilter(elem){
-		console.log("pasteFilter"+elem.value);
-		if(elem.value != null && elem.value != '' && elem.value.length > 0) {
+	function pasteFilter(e){
+		var clipboardData, pastedData;
+		e.stopPropagation();
+	    e.preventDefault();
+	    clipboardData = e.clipboardData || window.clipboardData;
+	    pastedData = clipboardData.getData('Text');
+	    
+		if(pastedData != null && pastedData != '' && pastedData.length > 0) {
 			var intiResult = '';
-			var valueArray = elem.value.split('');
+			var valueArray = pastedData.split('');
 			for(var i=0; i<valueArray.length; i++){
 				if(/^-?[\d]+$/.test(valueArray[i])){
 					intiResult+=valueArray[i];
 				}
 			}
-			elem.value=intiResult;
+			__pasteCursorPosition = Math.floor(intiResult.length/3) + intiResult.length%3;
+			this.value=intiResult;
 		}
 		return true;
 	}
@@ -113,6 +117,6 @@
 		for(var i=0; i<amountInputs.length; i++){
 			amountInputs[i].addEventListener("keyup", validAmount);
 			amountInputs[i].addEventListener("keypress", (event) => {event.returnValue =  validChar(event)});
-			// amountInputs[i].onpaste = function() {pasteFilter()};
+			amountInputs[i].addEventListener("paste", pasteFilter);
 		}
 	})();
