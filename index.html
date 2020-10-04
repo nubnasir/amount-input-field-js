@@ -7,7 +7,7 @@
 	<meta name="keywords" content="fintech,amount,validator,format,input,field,javascript,amount.js,amount-1.0.min.js">
 	<meta name="author" content="Md. Nasir Uddin Bhuiyan">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script type="text/javascript" src="amount.js"></script>
+	<!-- <script type="text/javascript" src="amount.js"></script> -->
 	<link rel="stylesheet" href='css/bootstrap.min.css'>
 	<style type="text/css">
 		.amount-field {
@@ -59,7 +59,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div class="input-field">
-					<input class="amount-field" type="text" onkeyup="validAmountOnKeyUp(this)" onkeypress="return validAmountOnKeyPress(this)" placeholder="8,105,365.75" autofocus>
+					<input class="amount" type="text" placeholder="8,105,365.75" onpaste="return pasteFilter(this)" autofocus>
 				</div>
 				<br>
 				<div class="notes">
@@ -107,3 +107,5 @@
 	</div>
 </body>
 </html>
+
+	<script type="text/javascript" src="amount.js"></script>
