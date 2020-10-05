@@ -8,14 +8,16 @@
 	var __pasteCursorPosition = 0;
 
 	function validAmount (e) {
-		if(!isValidInputValue(this.value)){
-			this.value = '';
+		var element = e.target;
+		console.log("validAmount" + element.value);
+		if(!isValidInputValue(element.value)){
+			element.value = '';
 			return;
 		}
 
 		var cursorPosition = e.target.selectionStart;
 		console.log("cursorPosition" + cursorPosition);
-		var elValue = this.value.split(".");
+		var elValue = element.value.split(".");
 		var value = elValue[0].replace(/,/g, '');
 		var decimalPart = elValue.length > 1? '.' + elValue[1].replace(',', '') : '';
 
@@ -49,7 +51,7 @@
 		}
 
 		result = result + (decimalPart.length <= 3 ? decimalPart : decimalPart.substring(0,3));
-		this.value = result;
+		element.value = result;
 
 		var charCode = (e.which) ? e.which : e.keyCode;
 		console.log("charCode" + charCode);
@@ -57,8 +59,10 @@
 		console.log("__splitInputValueOnKeyPress" + __splitInputValueOnKeyPress);
 		if((charCode >=48 && charCode <=57) || (charCode >=96 && charCode <=105) || charCode == 188 || charCode == 190){
 			cursorPositionAdder = result.substring(0,cursorPosition).split(",").length - __splitInputValueOnKeyPress;
-		} else if(detectMob()) {
-			cursorPositionAdder = result.substring(0,cursorPosition).split(",").length - __splitInputValueOnKeyPress;
+		}
+		if(detectMob()){
+			cursorPosition = result.length;
+			cursorPositionAdder = 0;
 		}
 		console.log("__pasteCursorPosition" + __pasteCursorPosition);
 		if(__pasteCursorPosition > 0){
@@ -94,6 +98,7 @@
 	}
 
 	function pasteFilter(e){
+		console.log("pasteFilter");
 		var clipboardData, pastedData;
 		e.stopPropagation();
 	    e.preventDefault();
@@ -109,9 +114,9 @@
 				}
 			}
 			__pasteCursorPosition = Math.floor(intiResult.length/3) + intiResult.length%3;
-			this.value=intiResult;
+			e.target.value=intiResult;
 		}
-		return true;
+		validAmount(e);
 	}
 
 	function detectMob() {
