@@ -57,6 +57,8 @@
 		console.log("__splitInputValueOnKeyPress" + __splitInputValueOnKeyPress);
 		if((charCode >=48 && charCode <=57) || (charCode >=96 && charCode <=105) || charCode == 188 || charCode == 190){
 			cursorPositionAdder = result.substring(0,cursorPosition).split(",").length - __splitInputValueOnKeyPress;
+		} else if(detectMob()) {
+			cursorPositionAdder = result.substring(0,cursorPosition).split(",").length - __splitInputValueOnKeyPress;
 		}
 		console.log("__pasteCursorPosition" + __pasteCursorPosition);
 		if(__pasteCursorPosition > 0){
@@ -110,6 +112,22 @@
 			this.value=intiResult;
 		}
 		return true;
+	}
+
+	function detectMob() {
+	    const toMatch = [
+	        /Android/i,
+	        /webOS/i,
+	        /iPhone/i,
+	        /iPad/i,
+	        /iPod/i,
+	        /BlackBerry/i,
+	        /Windows Phone/i
+	    ];
+
+	    return toMatch.some((toMatchItem) => {
+	        return navigator.userAgent.match(toMatchItem);
+	    });
 	}
 
 	(function(){
