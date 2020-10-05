@@ -66,12 +66,8 @@
 			__pasteCursorPosition = 0;
 		}
 		console.log("cursorPositionAdder" + cursorPositionAdder);
-		if(detectMob()) {
-			e.target.setSelectionRange(cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0), cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0));
-		} else {
-			e.target.selectionStart = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
-			e.target.selectionEnd = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
-		}
+		e.target.selectionStart = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
+		e.target.selectionEnd = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
 	}
 
 	function validChar (event) {
