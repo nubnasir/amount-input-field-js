@@ -60,18 +60,18 @@
 		if((charCode >=48 && charCode <=57) || (charCode >=96 && charCode <=105) || charCode == 188 || charCode == 190){
 			cursorPositionAdder = result.substring(0,cursorPosition).split(",").length - __splitInputValueOnKeyPress;
 		}
-		if(detectMob()){
-			cursorPosition = result.length;
-			cursorPositionAdder = 0;
-		}
 		console.log("__pasteCursorPosition" + __pasteCursorPosition);
 		if(__pasteCursorPosition > 0){
 			cursorPositionAdder += __pasteCursorPosition
 			__pasteCursorPosition = 0;
 		}
 		console.log("cursorPositionAdder" + cursorPositionAdder);
-		e.target.selectionStart = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
-		e.target.selectionEnd = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
+		if(detectMob()) {
+			e.target.setSelectionRange(cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0), cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0));
+		} else {
+			e.target.selectionStart = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
+			e.target.selectionEnd = cursorPosition + (cursorPositionAdder>0? cursorPositionAdder : 0);
+		}
 	}
 
 	function validChar (event) {
