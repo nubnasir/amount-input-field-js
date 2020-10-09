@@ -11,24 +11,28 @@ Key notes
 
 => No extra additional library is required
 
+=> Filter numbers [0-9] from pasted text
+
+=> No cursor position issue
+
+=> Easy configuration using class name "amount"
+
 
 How to use
 ### Step 1 
 
-download latest amount.min.js from this github repo
+download amount-2.0.min.js from this github repo
 
 ### Step 2 
 
-Add in html file inside head tag
+Add amount-2.0.min.js at the end of the page
 
 Example:
-&lt;head&gt;
-&lt;script type="text/javascript" src="amount.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
+&lt;script type="text/javascript" src="amount-2.0.min.js"&gt;&lt;/script&gt;
 
 ### Step 3
 
-In the amount input field add onkeyup="validAmountOnKeyUp(this)" and onkeypress="return validAmountOnKeyPress(this)"
+In the text input field add class "amount"
 
 
-Example: &lt;input type="text" onkeyup="validAmountOnKeyUp(this)" onkeypress="return validAmountOnKeyPress(this)" &gt;
+Example: &lt;input type="text" class="amount" &gt;

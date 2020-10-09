@@ -60,10 +60,6 @@
 		if((charCode >=48 && charCode <=57) || (charCode >=96 && charCode <=105) || charCode == 188 || charCode == 190){
 			cursorPositionAdder = result.substring(0,cursorPosition).split(",").length - __splitInputValueOnKeyPress;
 		}
-		if(detectMob()){
-			cursorPosition = result.length;
-			cursorPositionAdder = 0;
-		}
 		console.log("__pasteCursorPosition" + __pasteCursorPosition);
 		if(__pasteCursorPosition > 0){
 			cursorPositionAdder += __pasteCursorPosition
