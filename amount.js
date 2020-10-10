@@ -38,7 +38,7 @@
 		if(counter > 0){
 			resultArray.push(temp);
 		}
-			
+
 		var result = '';
 		for (var i = resultArray.length - 1; i >= 0; i--) {
 			temp = resultArray[i].split('');
@@ -100,7 +100,7 @@
 	    e.preventDefault();
 	    clipboardData = e.clipboardData || window.clipboardData;
 	    pastedData = clipboardData.getData('Text');
-	    
+
 		if(pastedData != null && pastedData != '' && pastedData.length > 0) {
 			var intiResult = '';
 			var valueArray = pastedData.split('');
@@ -115,27 +115,18 @@
 		validAmount(e);
 	}
 
-	function detectMob() {
-	    const toMatch = [
-	        /Android/i,
-	        /webOS/i,
-	        /iPhone/i,
-	        /iPad/i,
-	        /iPod/i,
-	        /BlackBerry/i,
-	        /Windows Phone/i
-	    ];
-
-	    return toMatch.some((toMatchItem) => {
-	        return navigator.userAgent.match(toMatchItem);
-	    });
-	}
-
-	(function(){
-		var amountInputs = document.getElementsByClassName("amount");
+	function addEvents(amountInputs) {
 		for(var i=0; i<amountInputs.length; i++){
 			amountInputs[i].addEventListener("keyup", validAmount);
 			amountInputs[i].addEventListener("keypress", (event) => {event.returnValue =  validChar(event)});
 			amountInputs[i].addEventListener("paste", pasteFilter);
 		}
+	}
+
+	(function(){
+		addEvents(document.getElementsByClassName("amount"));
 	})();
+
+	function apply_amount(className){
+		addEvents(document.getElementsByClassName(className));
+	}

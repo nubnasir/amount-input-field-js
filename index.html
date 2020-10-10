@@ -4,9 +4,10 @@
 	<meta name="robots" content="index, follow" />
 	<meta charset="UTF-8">
 	<meta name="description" content="Amount Validator and Auto Formatter Input Field - JavaScript">
-	<meta name="keywords" content="fintech,amount,validator,format,input,field,javascript,amount.js,amount-1.0.min.js">
+	<meta name="keywords" content="fintech,amount,validator,format,input,field,javascript,amount.js,amount-2.0.min.js,amount-1.0.min.js">
 	<meta name="author" content="Md. Nasir Uddin Bhuiyan">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="amount.js"></script>
 	<link rel="stylesheet" href='css/bootstrap.min.css'>
 	<style type="text/css">
 		.amount {
@@ -64,7 +65,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div class="input-field">
-					<input class="amount" type="text" placeholder="8,105,365.75" autofocus>
+					<input class="amount applyAmount" type="text" placeholder="8,105,365.75" autofocus>
 				</div>
 				<br>
 				<div class="notes">
@@ -81,6 +82,7 @@
 				</div>
 				<div class="notes">
 					<h3>How to use</h3>
+					<h5>Way 1 (with <span class="code-section">amount</span> class)</h5>
 					<p><b>Step 1</b> download <span class="code-section"><a target="_blank" href="https://nubnasir.github.io/amount-input-field-js/amount-2.0.min.js">amount-2.0.min.js</a></span> - <a target="_blank" href="https://nubnasir.github.io/amount-input-field-js/amount-2.0.min.js">click here to download</a></p>
 					<p><b>Step 2</b> Add <span class="code-section">amount-2.0.min.js</span> at the end of the page <br>
 						<span class="code-section">
@@ -88,6 +90,26 @@
 						</span>
 					</p>
 					<p><b>Step 3</b> In the amount input field add class <span class="code-section">amount</span>
+					</p>
+					<br/>
+
+					<h5>Way 2 (with <span class="code-section">your_custom_class_name</span>)</h5>
+					<p><b>Step 1</b> download <span class="code-section"><a target="_blank" href="https://nubnasir.github.io/amount-input-field-js/amount-2.0.min.js">amount-2.0.min.js</a></span> - <a target="_blank" href="https://nubnasir.github.io/amount-input-field-js/amount-2.0.min.js">click here to download</a></p>
+					<p><b>Step 2</b> Add amount-2.0.min.js at page <span class="code-section">&lt;head&gt;</span> tag<br>
+						<span class="code-section">
+							&lt;head&gt;<br>
+							&lt;script type="text/javascript" src="amount-2.0.min.js"&gt;&lt;/script&gt;<br>
+							&lt;head&gt;<br>
+						</span>
+					</p>
+					<p><b>Step 3</b> Add a custom class in your input field <span class="code-section">your_custom_class_name</span>. At the end of the page use function <span class="code-section">apply_amount</span> and pass <span class="code-section">your_custom_class_name</span><br>
+						<span class="code-section">
+							&lt;script type="text/javascript"&gt;<br>
+
+							apply_amount('your_custom_class_name');<br>
+
+							&lt;/script&gt;
+						</span>
 					</p>
 					<br/>
 				</div>
@@ -99,7 +121,7 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<h5>Released version</h3>
+				<h5>Released version</h5>
 				<div>
 					<a href="#">version - 2.0 (latest)</a><br> 
 					<a href="#">Documentation</a><br>
@@ -121,5 +143,6 @@
 	</div>
 </body>
 </html>
-
-	<script type="text/javascript" src="amount.js"></script>
+<script type="text/javascript">
+	apply_amount('applyAmount');
+</script>

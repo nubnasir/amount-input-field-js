@@ -18,7 +18,9 @@ Key notes
 => Easy configuration using class name "amount"
 
 
-How to use
+How to use 
+
+###(Way 1) with "amount" class
 ### Step 1 
 
 download amount-2.0.min.js from this github repo
@@ -36,3 +38,28 @@ In the text input field add class "amount"
 
 
 Example: &lt;input type="text" class="amount" &gt;
+
+###(Way 2) with custom class name "your_custom_class_name"
+### Step 1 
+
+download amount-2.0.min.js from this github repo
+
+### Step 2 
+
+Add amount-2.0.min.js at page &lt;head&gt; tag
+
+Example:
+&lt;head&gt;
+
+&lt;script type="text/javascript" src="amount-2.0.min.js"&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+### Step 3
+
+Add a custom class in your input field "your_custom_class_name". At the end of the page use function "apply_amount" and pass "your_custom_class_name"
+
+&lt;script type="text/javascript"&gt;
+
+apply_amount('your_custom_class_name');
+
+&lt;/script&gt;
