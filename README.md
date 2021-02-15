@@ -7,7 +7,7 @@ Key notes
 
 => Adds comma(,) automatically in exact position
 
-=> Prevents more that two(2) decimal points
+=> Prevents more than two(2) decimal points
 
 => No extra additional library is required
 
